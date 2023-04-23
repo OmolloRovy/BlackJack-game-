@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+    background: rgba(0, 0, 0, 1);
+    line-height: 49px;
+}
+
+div {
+    border: rgba(255, 255, 255, 0.575) 1px solid;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 120px;
+    border-radius: 5px;
+}
+
+h1 {
+    color: rgba(245, 7, 225, 0.993);
+    font-size: 50px;
+    font-weight: 1200;
+    padding: 20px;
+}
+
+p {
+    color: white;
+    font-size: 30px;
+}
+
+button {
+    background: rgba(6, 247, 186, 0.938);
+    font-size: 20px;
+    padding: 5px;
+    margin-top: 20px;
+    margin: 20px;
+    border: rgba(255, 255, 255, 0.575) 1px solid;
+    cursor: pointer;
+}
+
+#player-el {
+    color: rgb(241, 9, 229);
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 10px;
+    padding: 20px;
+}
+
+#player-el {
+    color: rgb(241, 9, 229);
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 10px;
+    padding: 20px;
+}
+
+button:hover {
+    background-color: red;
+}
