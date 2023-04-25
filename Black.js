@@ -12,10 +12,10 @@ let hasBlackJack = false
 let isALive = false
     //an empty message variable is declared
 let message = " "
-let messageEl = document.getElementById("message-el")[0];
-let sumEl = document.getElementById("sum-el")[0];
-let cardsEl = document.getElementById("cards-el")[0];
-let playerEl = document.getElementById("player-el")[0];
+let messageEl = document.getElementById("message-el");
+let sumEl = document.getElementById("sum-el");
+let cardsEl = document.getElementById("cards-el");
+let playerEl = document.getElementById("player-el");
 
 /*it generates a random number
 math.random()*13  gives a random number between 0.000-9.99
