@@ -1,77 +1,70 @@
-let player = {
-        name: "Vanistelrooy"
-    }
-    //an empty array is created
-let cards = []
+// Player information
+const player = {
+    name: "Vanistelrooy",
+    chips: 0
+};
 
-//sum is initialied with 0
-let sum = 0
-    //false because the game hasn't started
-let hasBlackJack = false
-    //false because the game hasn't started
-let isALive = false
-    //an empty message variable is declared
-let message = " "
-let messageEl = document.getElementById("message-el");
-let sumEl = document.getElementById("sum-el");
-let cardsEl = document.getElementById("cards-el");
-let playerEl = document.getElementById("player-el");
+// Game state variables
+let cards = [];
+let sum = 0;
+let hasBlackJack = false;
+let isAlive = false;
+let message = "";
 
-/*it generates a random number
-math.random()*13  gives a random number between 0.000-9.99
-the +1 adds 1 hence its between 1.0000-9.9999
-the math.floor() trancates leaving a whole number */
+// DOM elements
+const messageEl = document.getElementById("message-el");
+const sumEl = document.getElementById("sum-el");
+const cardsEl = document.getElementById("cards-el");
+const playerEl = document.getElementById("player-el");
 
+// Display player info
+playerEl.textContent = `${player.name}: $${player.chips}`;
+
+// Generate a random card value (1–13, face cards count as 10, Ace as 11)
 function getRandomCard() {
-    let randomNumber = Math.floor(Math.random() * 9) + 1
-    return randomNumber
+    const randomNumber = Math.floor(Math.random() * 13) + 1;
+    if (randomNumber > 10) return 10; // Jack, Queen, King
+    else if (randomNumber === 1) return 11; // Ace
+    else return randomNumber;
 }
-/*
-firstcard and secondcard are initialized with randomCard() between 1 and 10
-cards array holds 2 items
-sum adds firstcard and secondcard
-renderGame() shall be updating the sum of the cards that has been drawn as long as the game is alive
- */
+
+// Start the game
 function startGame() {
-    isALive = true //because the game has began
-    let firstCard = getRandomCard()
-    let secondCard = getRandomCard()
-    cards = [firstCard, secondCard]
-    sum = firstCard + secondCard
-    renderGame()
+    isAlive = true;
+    hasBlackJack = false;
+    const firstCard = getRandomCard();
+    const secondCard = getRandomCard();
+    cards = [firstCard, secondCard];
+    sum = firstCard + secondCard;
+    renderGame();
 }
 
+// Update the game interface
 function renderGame() {
-    //card confirmation to the gamer
-    cardsEl.textContent = "Cards:"
-    for (let i = 0; i < cards.length; i++) {
-        //this line displays the random cards drawn
-        cardsEl.textContent += cards[i] + " "
-            //adds the 2 cards
-        sumEl.textContent = "sum:" + sum
+    cardsEl.textContent = "Cards: " + cards.join(" ");
+    sumEl.textContent = "Sum: " + sum;
 
-    }
-    if (sum <= 20) {
-        message = "Do you want to draw a new card?"
+    if (sum < 21) {
+        message = "Do you want to draw a new card?";
     } else if (sum === 21) {
-        message = "You have BlackJack!"
-        hasBlackJack = true
-        playerEl.textContent = "Congratulations-" + player.name + ":$" + sum
+        message = "You’ve got Blackjack!";
+        hasBlackJack = true;
+        player.chips += 50; // reward for winning
+        playerEl.textContent = `${player.name}: $${player.chips}`;
     } else {
-        message = "You are out of Game!"
-        isALive = false
+        message = "You’re out of the game!";
+        isAlive = false;
     }
-    messageEl.textContent = message
 
-
+    messageEl.textContent = message;
 }
 
+// Draw a new card if game is still active
 function newCard() {
-    if (isALive === true && hasBlackJack === false) {
-        let card = getRandomCard()
-        cards.push(card)
-        sum += card
-
+    if (isAlive && !hasBlackJack) {
+        const newCardValue = getRandomCard();
+        cards.push(newCardValue);
+        sum += newCardValue;
+        renderGame();
     }
-    renderGame()
 }
